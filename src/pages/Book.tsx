@@ -76,8 +76,9 @@ const Book = () => {
         >
           <p>View book preview</p>
         </a>
-        <p className="published-date">{publishedDate}</p>
-        <p className="publisher">{publisher}</p>
+        <p className="published-details">
+          {publishedDate}, {publisher}
+        </p>
         <p className="has-ebook">{isEbook}</p>
         <p className="badge">{saleability}</p>
         <p className="badge">{maturityRating}</p>
