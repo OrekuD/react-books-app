@@ -1,0 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.book-page {
+  background-color: red;
+  min-height: calc(100vh - 80px);
+  display: flex;
+
+  .image-container {
+    flex: 1;
+    background-color: blue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .image {
+      width: 40vw;
+      height: calc(90vh - 80px);
+      background-color: aqua;
+    }
+  }
+
+  .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}

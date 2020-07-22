@@ -1,11 +1,27 @@
 import React from "react";
-import "./App.css";
+import "./App.scss";
+import { Switch, Route } from "react-router-dom";
+import { Home, Book } from "./pages";
+import { Header } from "./components";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
   return (
-    <div className="App">
-      <h2> Books </h2>
-    </div>
+    <>
+      <Header />
+      <Route
+        render={({ location }) => {
+          return (
+            <AnimatePresence initial={false} exitBeforeEnter>
+              <Switch location={location} key={location.pathname}>
+                <Route exact path="/" render={() => <Home />} />
+                <Route exact path="/book" render={() => <Book />} />
+              </Switch>
+            </AnimatePresence>
+          );
+        }}
+      />
+    </>
   );
 }
 
