@@ -8,7 +8,7 @@ import { AnimatePresence } from "framer-motion";
 function App() {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <Route
         render={({ location }) => {
           return (
