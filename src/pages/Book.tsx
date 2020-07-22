@@ -9,6 +9,27 @@ const containerVariants = {
   },
   animate: {
     opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delay: 0.6,
+    },
+  },
+};
+
+const ease = [0.6, -0.05, 0.01, 0.99];
+
+const contentVariants = {
+  initial: {
+    opacity: 0,
+    y: 60,
+  },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      ease,
+      duration: 0.6,
+    },
   },
 };
 
@@ -54,34 +75,48 @@ const Book = () => {
       </div>
       <div className="content">
         <Link to="/" className="back-to-home">
-          <p> Back to home </p>
+          <motion.p variants={contentVariants}> Back to home </motion.p>
         </Link>
-        <p className="title"> {title} </p>
+        <motion.p variants={contentVariants} className="title">
+          {title}
+        </motion.p>
         <span className="authors">
-          <p> By </p>
-          {authors.map((author) => (
-            <p className="author"> {author} </p>
-          ))}
+          <motion.p variants={contentVariants}> By </motion.p>
+          {authors.map((author) => {
+            if (authors.length > 1) {
+              return <motion.p variants={contentVariants}>{author},</motion.p>;
+            } else {
+              return <motion.p variants={contentVariants}>{author}</motion.p>;
+            }
+          })}
         </span>
-        <p className="snippet">
-          {" "}
+        <motion.p variants={contentVariants} className="snippet">
           Ullamco voluptate exercitation exercitation nisi incididunt cupidatat
-          occaecat sint irure consectetur quis enim voluptate.{" "}
-        </p>
-        <a
+          occaecat sint irure consectetur quis enim voluptate.
+        </motion.p>
+        <motion.p variants={contentVariants} className="published-details">
+          {publishedDate}, {publisher}
+        </motion.p>
+        <div className="extra-details">
+          <motion.p variants={contentVariants} className="badge">
+            {saleability}
+          </motion.p>
+          <motion.p variants={contentVariants} className="badge">
+            {maturityRating}
+          </motion.p>
+        </div>
+        <motion.p variants={contentVariants} className="has-ebook">
+          Has an ebook? {isEbook ? <span> Yes </span> : <span> No </span>}
+        </motion.p>
+        <motion.a
           href={previewLink}
           target="_blank"
           rel="noopener noreferrer"
           className="button"
+          variants={contentVariants}
         >
           <p>View book preview</p>
-        </a>
-        <p className="published-details">
-          {publishedDate}, {publisher}
-        </p>
-        <p className="has-ebook">{isEbook}</p>
-        <p className="badge">{saleability}</p>
-        <p className="badge">{maturityRating}</p>
+        </motion.a>
       </div>
     </motion.div>
   );

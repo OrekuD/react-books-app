@@ -23,8 +23,13 @@ button {
 }
 
 @font-face {
-  font-family: "Poppins300";
-  src: url(./assets/fonts/poppins-v5-latin-300.ttf);
+  font-family: "PoppinsItalic";
+  src: url(./assets/fonts/poppins-v5-latin-italic.ttf);
+}
+
+@font-face {
+  font-family: "PoppinsItalic500";
+  src: url(./assets/fonts/poppins-v5-latin-500italic.ttf);
 }
 
 @font-face {
@@ -84,10 +89,7 @@ button {
       p {
         font-family: "Poppins500";
         font-size: 0.8rem;
-
-        &:first-of-type {
-          margin-right: 0.3rem;
-        }
+        margin-right: 0.3rem;
       }
     }
 
@@ -98,9 +100,44 @@ button {
 
     .snippet {
       width: 35vw;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
       font-family: "PoppinsR";
       font-size: 0.9rem;
+    }
+
+    .published-details {
+      font-family: "PoppinsItalic";
+      font-size: 0.8rem;
+      color: #121212;
+      margin-bottom: 10px;
+    }
+
+    .extra-details {
+      display: flex;
+      width: fit-content;
+      margin-bottom: 10px;
+
+      .badge {
+        padding: 5px 15px;
+        border-radius: 3px;
+        background-color: #99999a;
+        width: fit-content;
+        margin-right: 5px;
+        text-transform: uppercase;
+        color: #ffffff;
+        font-family: "PoppinsR";
+        font-size: 0.6rem;
+      }
+    }
+
+    .has-ebook {
+      font-family: "PoppinsR";
+      font-size: 0.8rem;
+      margin-bottom: 10px;
+
+      span {
+        font-family: "Poppins500";
+      }
     }
 
     .button {
@@ -108,7 +145,7 @@ button {
       border-radius: 3px;
       background-color: #4887f4;
       width: fit-content;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
 
       p {
         text-transform: uppercase;
@@ -116,17 +153,6 @@ button {
         font-family: "PoppinsR";
         font-size: 0.7rem;
       }
-    }
-
-    .badge {
-      padding: 5px 15px;
-      border-radius: 3px;
-      background-color: #4887f4;
-      width: fit-content;
-      text-transform: uppercase;
-      color: #f3f3f5;
-      font-family: "PoppinsR";
-      font-size: 0.6rem;
     }
   }
 }
