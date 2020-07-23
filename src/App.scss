@@ -42,20 +42,33 @@ button {
   src: url(./assets/fonts/poppins-v5-latin-800.ttf);
 }
 
-.book-page {
-  min-height: 100vh;
+.books {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding-top: 30px;
+}
+
+.book-page {
+  height: 100vh;
+  display: flex;
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+  }
 
   .image-container {
     flex: 1;
-    // background-color: blue;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 50px;
+
+    @media (max-width: 900px) {
+      flex: 1.2;
+      padding: 10px;
+    }
 
     .image {
-      width: 40vw;
-      height: calc(90vh - 80px);
+      flex: 1;
       background-color: aqua;
     }
   }
@@ -68,6 +81,10 @@ button {
     padding-left: 50px;
     background-color: #f3f3f5;
 
+    @media (max-width: 500px) {
+      padding: 0 20px;
+    }
+
     .back-to-home {
       font-family: "Poppins500";
       margin-bottom: 50px;
@@ -77,6 +94,10 @@ button {
       transition: 0.2s ease-in;
       width: fit-content;
 
+      @media (max-width: 500px) {
+        margin-bottom: 20px;
+      }
+
       &:hover {
         color: #121212;
       }
@@ -85,6 +106,10 @@ button {
     .authors {
       display: flex;
       margin-bottom: 30px;
+
+      @media (max-width: 500px) {
+        margin-bottom: 10px;
+      }
 
       p {
         font-family: "Poppins500";
@@ -96,13 +121,6 @@ button {
     .title {
       font-family: "Poppins800";
       font-size: 2rem;
-    }
-
-    .snippet {
-      width: 35vw;
-      margin-bottom: 20px;
-      font-family: "PoppinsR";
-      font-size: 0.9rem;
     }
 
     .published-details {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { re } from "../config";
 import { Link } from "react-router-dom";
+import { Book } from "../types";
 
 const containerVariants = {
   initial: {
@@ -11,8 +12,11 @@ const containerVariants = {
     opacity: 1,
     transition: {
       staggerChildren: 0.1,
-      delay: 0.6,
+      delay: 0.2,
     },
+  },
+  exit: {
+    opacity: 0,
   },
 };
 
@@ -29,28 +33,37 @@ const contentVariants = {
     transition: {
       ease,
       duration: 0.6,
+      //   delay: 0.8,
     },
   },
 };
 
-const Book = () => {
-  const [bookDetails, setBookDetails] = useState({});
+interface Props {
+  location: any;
+}
+
+const BookPage = ({ location }: Props) => {
+  const [bookDetails, setBookDetails] = useState<Book>(re);
+  // const [snippet, setSnippet] = useState<string>("");
   useEffect(() => {
     // fetchBookData();
-  }, []);
+    // setSnippet(location.state.textSnippet);
+  }, [location]);
 
   const fetchBookData = async () => {
-    const id = "qo";
-    const response = await fetch(
-      `https://www.googleapis.com/books/v1/volumes/${id}`
-    );
+    // const id = location.pathname.slice(6, location.pathname.length)
+    // const response = await fetch(
+    //   `https://www.googleapis.com/books/v1/volumes/${id}`
+    // );
 
-    const data = await response.json();
+    // const data = await response.json();
     // console.log(data);
-    setBookDetails(data);
+    // setBookDetails(data);
+
+    setBookDetails(re);
   };
 
-  const { volumeInfo, saleInfo, accessInfo } = re;
+  const { volumeInfo, saleInfo, accessInfo } = bookDetails;
   const {
     title,
     authors,
@@ -67,15 +80,15 @@ const Book = () => {
       variants={containerVariants}
       initial="initial"
       animate="animate"
-      exit="initial"
+      exit="exit"
       className="book-page"
     >
       <div className="image-container">
-        <div className="image"></div>
+        <img src={extraLarge} alt="thumbnail" className="image" />
       </div>
       <div className="content">
         <Link to="/" className="back-to-home">
-          <motion.p variants={contentVariants}> Back to home </motion.p>
+          <motion.p variants={contentVariants}> View more books </motion.p>
         </Link>
         <motion.p variants={contentVariants} className="title">
           {title}
@@ -84,16 +97,28 @@ const Book = () => {
           <motion.p variants={contentVariants}> By </motion.p>
           {authors.map((author) => {
             if (authors.length > 1) {
-              return <motion.p variants={contentVariants}>{author},</motion.p>;
+              return (
+                <motion.p key={author} variants={contentVariants}>
+                  {author},
+                </motion.p>
+              );
             } else {
-              return <motion.p variants={contentVariants}>{author}</motion.p>;
+              return (
+                <motion.p key={author} variants={contentVariants}>
+                  {author}
+                </motion.p>
+              );
             }
           })}
         </span>
-        <motion.p variants={contentVariants} className="snippet">
+        {/* <motion.div
+          variants={contentVariants}
+          className="snippet"
+          dangerouslySetInnerHTML={{ __html: snippet }}
+        >
           Ullamco voluptate exercitation exercitation nisi incididunt cupidatat
-          occaecat sint irure consectetur quis enim voluptate.
-        </motion.p>
+          occaecat sint irure consectetur quis enim voluptate. 
+        </motion.div> */}
         <motion.p variants={contentVariants} className="published-details">
           {publishedDate}, {publisher}
         </motion.p>
@@ -122,4 +147,4 @@ const Book = () => {
   );
 };
 
-export default Book;
+export default BookPage;

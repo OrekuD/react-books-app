@@ -1,5 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Header, Card } from "../components";
+import { books } from "../config";
 
 const containerVariants = {
   initial: {
@@ -18,7 +20,12 @@ const Home = () => {
       animate="animate"
       exit="initial"
     >
-      <h1> Home </h1>
+      <Header />
+      <div className="books">
+        {books.map((book) => (
+          <Card key={book.id} book={book} />
+        ))}
+      </div>
     </motion.div>
   );
 };
