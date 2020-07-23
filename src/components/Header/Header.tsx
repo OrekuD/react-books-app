@@ -1,12 +1,54 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import "./styles.scss";
 
-const Header = () => {
+const variants = {
+  moveUp: {
+    height: "40vh",
+    transition: {
+      ease: "easeOut",
+      duration: 0.6,
+    },
+  },
+};
+
+interface Props {
+  fetchData: () => void;
+  searchTerm: string;
+  setSearch: (value: string) => void;
+  isSearchComplete: boolean;
+}
+
+const Header = ({
+  fetchData,
+  searchTerm,
+  setSearch,
+  isSearchComplete,
+}: Props) => {
+  const animation = useAnimation();
+
+  const search = () => {
+    fetchData();
+    if (isSearchComplete) {
+      animation.start("moveUp");
+    }
+  };
+
   return (
-    <motion.div className="header">
-      <p className="main-title">Books</p>
-      <input type="text" className="input" />
+    <motion.div variants={variants} animate={animation} className="header">
+      <p className="main-title">Search for books!</p>
+      <input
+        type="text"
+        className="input"
+        value={searchTerm}
+        onChange={(e) => setSearch(e.target.value)}
+        onKeyPress={(e) => {
+          if (e.key === "Enter") {
+            search();
+          }
+        }}
+      />
+      <button onClick={search}>Search</button>
     </motion.div>
   );
 };

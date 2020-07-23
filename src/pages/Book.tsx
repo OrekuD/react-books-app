@@ -43,27 +43,25 @@ interface Props {
 }
 
 const BookPage = ({ location }: Props) => {
-  const [bookDetails, setBookDetails] = useState<Book>(re);
-  // const [snippet, setSnippet] = useState<string>("");
+  const [bookDetails, setBookDetails] = useState<Book | null>(null);
   useEffect(() => {
-    // fetchBookData();
-    // setSnippet(location.state.textSnippet);
+    fetchBookData();
   }, [location]);
 
   const fetchBookData = async () => {
-    // const id = location.pathname.slice(6, location.pathname.length)
-    // const response = await fetch(
-    //   `https://www.googleapis.com/books/v1/volumes/${id}`
-    // );
+    const id = location.pathname.slice(6, location.pathname.length);
+    const response = await fetch(
+      `https://www.googleapis.com/books/v1/volumes/${id}`
+    );
 
-    // const data = await response.json();
-    // console.log(data);
-    // setBookDetails(data);
+    const data = await response.json();
+    console.log(data);
+    setBookDetails(data);
 
-    setBookDetails(re);
+    // setBookDetails(re);
   };
 
-  const { volumeInfo, saleInfo, accessInfo } = bookDetails;
+  const { volumeInfo, saleInfo } = bookDetails;
   const {
     title,
     authors,
@@ -95,30 +93,19 @@ const BookPage = ({ location }: Props) => {
         </motion.p>
         <span className="authors">
           <motion.p variants={contentVariants}> By </motion.p>
-          {authors.map((author) => {
-            if (authors.length > 1) {
-              return (
-                <motion.p key={author} variants={contentVariants}>
-                  {author},
-                </motion.p>
-              );
-            } else {
-              return (
-                <motion.p key={author} variants={contentVariants}>
-                  {author}
-                </motion.p>
-              );
-            }
-          })}
+          {authors.map((author: string, index: number) => (
+            <motion.p key={author} variants={contentVariants}>
+              {author}
+              {index === authors.length - 1 ? (
+                ""
+              ) : authors.length > 1 ? (
+                <span>,</span>
+              ) : (
+                ""
+              )}
+            </motion.p>
+          ))}
         </span>
-        {/* <motion.div
-          variants={contentVariants}
-          className="snippet"
-          dangerouslySetInnerHTML={{ __html: snippet }}
-        >
-          Ullamco voluptate exercitation exercitation nisi incididunt cupidatat
-          occaecat sint irure consectetur quis enim voluptate. 
-        </motion.div> */}
         <motion.p variants={contentVariants} className="published-details">
           {publishedDate}, {publisher}
         </motion.p>

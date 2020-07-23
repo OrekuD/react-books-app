@@ -38,10 +38,9 @@ const Card = ({ book }: Props) => {
             pathname: `/book/${id}`,
             state: { textSnippet },
           }}
+          className="button"
         >
-          <div className="button">
-            <p> View book details </p>
-          </div>
+          <p> View book details </p>
         </Link>
       </div>
     </div>
