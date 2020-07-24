@@ -1,3 +1,8 @@
+export interface AppContext {
+  books: Book[] | [];
+  setBooks: (books: Book[] | []) => void;
+}
+
 export interface Book {
   kind: string;
   id: string;
