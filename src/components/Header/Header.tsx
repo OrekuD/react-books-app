@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import "./styles.scss";
 
@@ -29,10 +29,13 @@ const Header = ({
 
   const search = () => {
     fetchData();
+  };
+
+  useEffect(() => {
     if (isSearchComplete) {
       animation.start("moveUp");
     }
-  };
+  }, [isSearchComplete]);
 
   return (
     <motion.div variants={variants} animate={animation} className="header">

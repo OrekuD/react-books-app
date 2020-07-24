@@ -12,11 +12,12 @@ function App() {
           return (
             <AnimatePresence exitBeforeEnter>
               <Switch location={location} key={location.pathname}>
-                <Route exact path="/" render={() => <Home />} />
+                <Route exact path="/" render={() => <Home />} key="Home" />
                 <Route
                   exact
                   path="/book/:id"
                   render={() => <Book location={location} />}
+                  key="Book"
                 />
               </Switch>
             </AnimatePresence>

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { re } from "../config";
 import { Link } from "react-router-dom";
-import { Book } from "../types";
 
 const containerVariants = {
   initial: {
@@ -33,7 +31,6 @@ const contentVariants = {
     transition: {
       ease,
       duration: 0.6,
-      //   delay: 0.8,
     },
   },
 };
@@ -43,7 +40,8 @@ interface Props {
 }
 
 const BookPage = ({ location }: Props) => {
-  const [bookDetails, setBookDetails] = useState<Book | null>(null);
+  const [bookDetails, setBookDetails] = useState<any>({});
+  const [isLoading, setIsloading] = useState<boolean>(true);
   useEffect(() => {
     fetchBookData();
   }, [location]);
@@ -57,9 +55,17 @@ const BookPage = ({ location }: Props) => {
     const data = await response.json();
     console.log(data);
     setBookDetails(data);
-
-    // setBookDetails(re);
+    setIsloading(false);
   };
+
+  if (isLoading) {
+    return (
+      <div>
+        {" "}
+        <h1> isLoading</h1>{" "}
+      </div>
+    );
+  }
 
   const { volumeInfo, saleInfo } = bookDetails;
   const {
@@ -68,7 +74,7 @@ const BookPage = ({ location }: Props) => {
     publishedDate,
     publisher,
     maturityRating,
-    imageLinks: { large, extraLarge },
+    imageLinks: { thumbnail },
     previewLink,
   } = volumeInfo;
   const { saleability, isEbook } = saleInfo;
@@ -82,7 +88,7 @@ const BookPage = ({ location }: Props) => {
       className="book-page"
     >
       <div className="image-container">
-        <img src={extraLarge} alt="thumbnail" className="image" />
+        <img src={thumbnail} alt="thumbnail" className="image" />
       </div>
       <div className="content">
         <Link to="/" className="back-to-home">

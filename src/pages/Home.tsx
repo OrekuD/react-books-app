@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Header, Card } from "../components";
+import { Book } from "../types";
 
 const containerVariants = {
   initial: {
@@ -32,7 +33,7 @@ const variants = {
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [searchResults, setSearchResults] = useState<Array<{ id: string }>>([]);
+  const [searchResults, setSearchResults] = useState<Book[]>([]);
   const [isSearchComplete, setIsSearchComplete] = useState<boolean>(false);
 
   const setSearch = (value: string) => {
@@ -45,16 +46,11 @@ const Home = () => {
         `https://www.googleapis.com/books/v1/volumes?q=${searchTerm}`
       );
       const data = await response.json();
-
-      console.log(data.items);
-      setIsSearchComplete(true);
       setSearchResults(data.items);
+      setIsSearchComplete(true);
     } catch (error) {
       alert("Please check your internet connection and try again");
     }
-    // setTimeout(() => {
-    //   setSearchResults(books);
-    // }, 2000);
   };
 
   return (
@@ -70,13 +66,17 @@ const Home = () => {
         setSearch={setSearch}
         isSearchComplete={isSearchComplete}
       />
-      <motion.div variants={containerVariants} className="books">
-        {searchResults.map((book) => (
-          <motion.div variants={variants}>
-            <Card key={book.id} book={book} />
-          </motion.div>
-        ))}
-      </motion.div>
+      {isSearchComplete ? (
+        <motion.div variants={containerVariants} className="books">
+          {searchResults.map((book) => (
+            <motion.div key={book.id} variants={variants}>
+              <Card book={book} />
+            </motion.div>
+          ))}
+        </motion.div>
+      ) : (
+        ""
+      )}
     </motion.div>
   );
 };
