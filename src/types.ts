@@ -1,6 +1,6 @@
 export interface AppContext {
-  books: Book[] | [];
-  setBooks: (books: Book[] | []) => void;
+  books: Book[];
+  setBooks: (books: Book[]) => void;
 }
 
 export interface Book {

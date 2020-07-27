@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Header, Card } from "../components";
 import { Book } from "../types";
-
 const containerVariants = {
   initial: {
     opacity: 0,

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import Spinner from "../components/Spinner/Spinner";
 
 const containerVariants = {
   initial: {
@@ -60,9 +61,8 @@ const BookPage = ({ location }: Props) => {
 
   if (isLoading) {
     return (
-      <div>
-        {" "}
-        <h1> isLoading</h1>{" "}
+      <div className="loading-screen">
+        <Spinner size={100} color="#121212" />
       </div>
     );
   }

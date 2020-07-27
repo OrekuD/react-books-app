@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import "./styles.scss";
+import Spinner from "../Spinner/Spinner";
 
 const variants = {
   moveUp: {
@@ -51,7 +52,9 @@ const Header = ({
           }
         }}
       />
-      <button onClick={search}>Search</button>
+      <button onClick={search}>
+        Search {isSearchComplete && <Spinner size={40} color="#ffffff" />}
+      </button>
     </motion.div>
   );
 };
